@@ -290,7 +290,7 @@ all =
                         |> Common.queryView
                         |> findHeader
                         |> Query.has
-                            [ style "height" "74px"
+                            [ style "height" "82px"
                             , style "box-sizing" "border-box"
                             ]
             , test "card wrapper expands with number of variables" <|
@@ -304,7 +304,7 @@ all =
                             ]
                         |> Common.queryView
                         |> findCardWrapper
-                        |> Query.has [ style "height" "289px" ]
+                        |> Query.has [ style "height" "297px" ]
             , test "card header height matches largest header in row" <|
                 \_ ->
                     whenOnDashboardViewingInstanceGroup { dashboardView = ViewNonArchivedPipelines }
@@ -321,7 +321,7 @@ all =
                         |> Query.first
                         |> findHeader
                         |> Query.has
-                            [ style "height" "74px"
+                            [ style "height" "82px"
                             , style "box-sizing" "border-box"
                             ]
             , test "when no instance vars, displays 'no vars'" <|

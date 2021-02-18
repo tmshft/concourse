@@ -289,21 +289,27 @@ headerView section pipeline resourceError headerHeight inInstanceGroupView =
                 [ Html.div Styles.noInstanceVars [ Html.text "no instance vars" ] ]
 
             else
-                pipeline.instanceVars
-                    |> Dict.toList
-                    |> List.concatMap (\( k, v ) -> flattenJson k v)
-                    |> List.map
-                        (\( k, v ) ->
-                            Html.div
-                                (class "instance-var"
-                                    :: Styles.instanceVar
-                                    ++ Tooltip.hoverAttrs (PipelineCardInstanceVar section pipeline.id k v)
-                                )
-                                [ Html.span [ style "color" Colors.pending ]
-                                    [ Html.text <| k ++ ": " ]
-                                , Html.text v
-                                ]
-                        )
+                let
+                    spacer =
+                        Html.div [ style "height" "8px" ] []
+                in
+                List.intersperse spacer
+                    (pipeline.instanceVars
+                        |> Dict.toList
+                        |> List.concatMap (\( k, v ) -> flattenJson k v)
+                        |> List.map
+                            (\( k, v ) ->
+                                Html.div
+                                    (class "instance-var"
+                                        :: Styles.instanceVar
+                                        ++ Tooltip.hoverAttrs (PipelineCardInstanceVar section pipeline.id k v)
+                                    )
+                                    [ Html.span [ style "color" Colors.pending ]
+                                        [ Html.text <| k ++ ": " ]
+                                    , Html.text v
+                                    ]
+                            )
+                    )
 
         resourceErrorElem =
             Html.div
